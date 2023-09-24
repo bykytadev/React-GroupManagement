@@ -1,0 +1,21 @@
+.root{
+    .container{
+        max-width: 1320px;
+        margin: 0 auto;
+        .header {
+            ul {
+                display: flex;
+                list-style: none;
+                justify-content: center;
+            }
+            &__link{
+                text-decoration: none;
+                color: rgb(46, 46, 46);
+                font-weight: bold;
+                display: block;
+                background-color: lightblue;
+                padding: 8px 20px;
+            }
+        }
+    }
+}
