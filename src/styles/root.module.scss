@@ -1,4 +1,6 @@
 .root{
+    text-align: center;
+
     .container{
         max-width: 1320px;
         margin: 0 auto;
@@ -16,6 +18,10 @@
                 background-color: lightblue;
                 padding: 8px 20px;
             }
+        }
+        .form-label{
+            display: block;
+            margin-bottom: 0.5rem;
         }
     }
 }

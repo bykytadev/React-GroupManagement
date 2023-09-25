@@ -15,6 +15,17 @@ Các chức năng của final project:
 ---------------------------------------------------------------
 npm install react-router-dom localforage match-sorter sort-by
 npm install sass
+
+---------------------------------------------------------------
+Login:
+FirstName
+LastName
+Username
+Email
+Password
+Confirm Password
+
+buton: Sign Up
 -->
 
 # Getting Started with Create React App

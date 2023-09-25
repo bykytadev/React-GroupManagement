@@ -1,0 +1,11 @@
+.root {
+    box-sizing: border-box;
+    margin: 0;
+    .form-control {
+        min-height: auto;
+        padding: 0.32rem 0.75rem;
+        border: 0;
+        background: transparent;
+        transition: all 0.2s linear;
+    }
+}
