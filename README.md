@@ -17,15 +17,26 @@ npm install react-router-dom localforage match-sorter sort-by
 npm install sass
 
 ---------------------------------------------------------------
-Login:
+Create new account:
 FirstName
 LastName
 Username
 Email
 Password
 Confirm Password
+button: Sign Up
+làm thông báo sign up successfully
+thêm tính năng resend email
+---------------------------------------------------------------
+Reset password:
+Email
+button: Send
 
-buton: Sign Up
+----------------------------------------------------------------
+Login:
+Username
+Password
+----------------------------------------------------------------
 -->
 
 # Getting Started with Create React App

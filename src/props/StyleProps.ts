@@ -37,3 +37,12 @@ export interface FormValues {
   confirmPassword: string;
 }
 
+export interface ResetPasswordProps {
+  email: string;
+}
+
+export interface ResetPasswordProps {
+  title: string;
+  emailLabel: string;
+  buttonLabel: string;
+}

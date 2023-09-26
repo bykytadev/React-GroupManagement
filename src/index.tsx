@@ -6,9 +6,10 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom"
 import LayoutRoot from 'components/LayoutRoot';
 import Login from 'components/Login';
 import CreateNewAccount from 'containers/CreateNewAccount';
-import ResetPassword from 'components/ResetPassword';
 import ProfileManagement from 'components/ProfileManagement';
 import GroupManagement from 'components/GroupManagement';
+import ResetPassword from 'containers/ResetPassword';
+import NewPassword from 'components/NewPassword';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "reset-password",
         element: <ResetPassword />
+      },
+      {
+        path: "auth/new-password",
+        element: <NewPassword/>
       },
       {
         path: "profile-management",
