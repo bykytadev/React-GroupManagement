@@ -9,7 +9,7 @@ import CreateNewAccount from 'containers/CreateNewAccount';
 import ProfileManagement from 'components/ProfileManagement';
 import GroupManagement from 'components/GroupManagement';
 import ResetPassword from 'containers/ResetPassword';
-import NewPassword from 'components/NewPassword';
+import NewPassword from 'containers/NewPassword';
 
 const router = createBrowserRouter([
   {
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
         element: <ResetPassword />
       },
       {
-        path: "auth/new-password",
+        path: "auth/new-password/:token",
         element: <NewPassword/>
       },
       {
@@ -44,8 +44,6 @@ const router = createBrowserRouter([
   },
 
 ])
-
-// /contact
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

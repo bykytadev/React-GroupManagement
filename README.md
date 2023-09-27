@@ -15,6 +15,7 @@ Các chức năng của final project:
 ---------------------------------------------------------------
 npm install react-router-dom localforage match-sorter sort-by
 npm install sass
+npm i uuid
 
 ---------------------------------------------------------------
 Create new account:
