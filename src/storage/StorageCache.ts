@@ -1,4 +1,4 @@
-type User = {
+export type User = {
   firstname: string;
   lastname: string;
   username: string;
@@ -7,18 +7,18 @@ type User = {
   status: string;
 };
 
-const isRememberMe = (): boolean => {
+export const isRememberMe = (): boolean => {
   if (localStorage.getItem("isRememberMe") !== null) {
     return JSON.parse(localStorage.getItem("isRememberMe") || 'false');
   }
   return true;
 }
 
-const setRememberMe = (isRemember: boolean): void => {
+export const setRememberMe = (isRemember: boolean): void => {
   localStorage.setItem("isRememberMe", JSON.stringify(isRemember));
 }
 
-const setItem = (key: string, value: string): void => {
+export const setItem = (key: string, value: string): void => {
   if (isRememberMe()) {
     localStorage.setItem(key, value);
   } else {
@@ -26,14 +26,14 @@ const setItem = (key: string, value: string): void => {
   }
 }
 
-const getItem = (key: string): string | null => {
+export const getItem = (key: string): string | null => {
   if (isRememberMe()) {
     return localStorage.getItem(key);
   }
   return sessionStorage.getItem(key);
 }
 
-const removeItem = (key: string): void => {
+export const removeItem = (key: string): void => {
   if (isRememberMe()) {
     localStorage.removeItem(key);
   } else {
@@ -41,23 +41,23 @@ const removeItem = (key: string): void => {
   }
 }
 
-const setToken = (token: string): void => {
+export const setToken = (token: string): void => {
   setItem("token", token);
 }
 
-const removeToken = (): void => {
+export const removeToken = (): void => {
   removeItem("token");
 }
 
-const getToken = (): string | null => {
+export const getToken = (): string | null => {
   return getItem("token");
 }
 
-const isAuth = (): boolean => {
+export const isAuth = (): boolean => {
   return getToken() !== null;
 }
 
-const setUserInfo = (user: User): void => {
+export const setUserInfo = (user: User): void => {
   setItem("firstname", user.firstname);
   setItem("lastname", user.lastname);
   setItem("username", user.username);
@@ -66,7 +66,7 @@ const setUserInfo = (user: User): void => {
   setItem("status", user.status);
 }
 
-const getUserInfo = (): User | null => {
+export const getUserInfo = (): User | null => {
   return {
     "firstname": getItem("firstname") || "",
     "lastname": getItem("lastname") || "",
@@ -77,7 +77,7 @@ const getUserInfo = (): User | null => {
   };
 }
 
-const removeUserInfo = (): void => {
+export const removeUserInfo = (): void => {
   removeItem("firstname");
   removeItem("lastname");
   removeItem("username");
@@ -85,7 +85,3 @@ const removeUserInfo = (): void => {
   removeItem("role");
   removeItem("status");
 };
-
-// export
-const Storage = { isRememberMe, setRememberMe, setToken, getToken, removeToken, isAuth, setUserInfo, getUserInfo, removeUserInfo };
-export default Storage;

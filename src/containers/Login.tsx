@@ -3,9 +3,9 @@ import axios from 'axios';
 import styles from 'styles/Login.module.scss';
 
 export default function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [rememberMe, setRememberMe] = useState<boolean>(false);
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -13,10 +13,6 @@ export default function Login() {
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
-  };
-
-  const handleForgotPasswordClick = () => {
-    window.location.href = 'http://localhost:3000/reset-password';
   };
 
   const handleRememberMeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
