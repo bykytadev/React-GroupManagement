@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FormValues } from 'props/StyleProps';
 import FormInput from 'components/FormInput';
-import styles from 'styles/signup.module.scss';
+import styles from 'styles/SignUp.module.scss';
 import axios from 'axios';
 
 const FormSignUp: React.FC = () => {
@@ -73,7 +73,7 @@ const FormSignUp: React.FC = () => {
   }
 
   return (
-    <div className={styles.root}>
+    <div className={styles.signUp}>
       {isSubmitted ? (
         <div>
           <h3>You need to confirm your account</h3>
@@ -83,7 +83,7 @@ const FormSignUp: React.FC = () => {
         </div>
       ) : (
         <form onSubmit={handleSubmit}>
-          <h3>Registration Info</h3>
+          <h3>Registration</h3>
           <FormInput label="First Name" value={formValues.firstName} onChange={handleChange('firstName')} />
           <FormInput label="Last Name" value={formValues.lastName} onChange={handleChange('lastName')} />
           <FormInput label="User Name" value={formValues.userName} onChange={handleChange('userName')} />
@@ -98,6 +98,3 @@ const FormSignUp: React.FC = () => {
 }
 
 export default FormSignUp;
-
-// FormSignUp.scss
-/* styles for form */

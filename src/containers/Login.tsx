@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Storage from 'storage/StorageCache'
+import styles from 'styles/Login.module.scss';
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -68,24 +68,24 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div className={styles.Login}>
       <form onSubmit={handleSignInSubmit}>
         <div>
-          <label htmlFor="username">Username:</label>
-          <input type="text" id="username" value={username} onChange={handleUsernameChange} />
+          <label htmlFor="username" className={styles.label}>Username:</label>
+          <input type="text" id="username" value={username} onChange={handleUsernameChange} className={styles.input} />
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
-          <input type="password" id="password" value={password} onChange={handlePasswordChange} />
+          <label htmlFor="password" className={styles.label}>Password:</label>
+          <input type="password" id="password" value={password} onChange={handlePasswordChange} className={styles.input} />
         </div>
         <div>
-          <label htmlFor="rememberMe">Remember me next time:</label>
-          <input type="checkbox" id="rememberMe" checked={rememberMe} onChange={handleRememberMeChange} />
+          <label htmlFor="rememberMe" className={styles.label}>Remember me</label>
+          <input type="checkbox" id="rememberMe" checked={rememberMe} onChange={handleRememberMeChange} className={styles.checkbox} />
         </div>
         <div>
-          <button type="submit">Sign In</button>
+          <button type="submit" className={styles.button}>Sign In</button>
           <p>
-            <a href="http://localhost:3000/reset-password">Forgot password</a>
+            <a href="http://localhost:3000/reset-password" className={styles.link}>Forgot password?</a>
           </p>
         </div>
       </form>

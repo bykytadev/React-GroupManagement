@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import styles from 'styles/ResetPassword.module.scss';
 
 function ResetPassword() {
   const [email, setEmail] = useState('');
@@ -25,14 +26,15 @@ function ResetPassword() {
       });
   };
 
-
   return (
-    <div>
-      <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
-      <button onClick={handleResetPassword}>Reset Password</button>
-      <p>{message}</p>
-    </div>
-  );
-}
 
+      <div className={styles.ResetPassword}>
+        <label htmlFor="email-label">Email reset password:</label>
+        <input className={styles['email-input']} type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} />
+        <br />
+        <button className={styles['reset-password-button']} onClick={handleResetPassword}>Reset Password</button>
+        <p className={styles['message']}>{message}</p>
+    </div>
+  )
+}
 export default ResetPassword;

@@ -4,7 +4,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from "react-router-dom"
 import LayoutRoot from 'components/LayoutRoot';
-import Login from 'components/Login';
+import Login from 'containers/Login';
 import CreateNewAccount from 'containers/CreateNewAccount';
 import ProfileManagement from 'components/ProfileManagement';
 import GroupManagement from 'components/GroupManagement';

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styles from 'styles/NewPassword.module.scss'
 
 const NewPassword = () => {
   const [password, setPassword] = useState('');
@@ -45,14 +46,14 @@ const NewPassword = () => {
   };
 
   return (
-    <div>
+    <div className={styles.NewPassword}>
       <label htmlFor="password">Password:</label>
-      <input type="password" id="password" value={password} onChange={handlePasswordChange} />
+      <input className={styles['password-input']} type="password" id="password" value={password} onChange={handlePasswordChange} />
       <br />
       <label htmlFor="confirmPassword">Confirm Password:</label>
-      <input type="password" id="confirmPassword" value={confirmPassword} onChange={handleConfirmPasswordChange} />
+      <input className={styles['confirm-password-input']} type="password" id="confirmPassword" value={confirmPassword} onChange={handleConfirmPasswordChange} />
       <br />
-      <button onClick={handleResetPassword}>Reset Password</button>
+      <button className={styles['reset-password-button']} onClick={handleResetPassword}>Reset Password</button>
     </div>
   );
 };
