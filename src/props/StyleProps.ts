@@ -46,3 +46,9 @@ export interface ResetPasswordProps {
   emailLabel: string;
   buttonLabel: string;
 }
+
+
+export interface Group {
+  id: number;
+  name: string;
+}

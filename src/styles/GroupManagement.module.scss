@@ -1,0 +1,134 @@
+.groupManagement__form {
+    margin-bottom: 40px;
+
+    & h2 {
+        margin-bottom: 10px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    & form {
+        display: flex;
+        flex-direction: column;
+
+        & .groupManagement__formWrapper {
+            margin-bottom: 10px;
+
+            & label {
+                display: block;
+                margin-bottom: 5px;
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+            & input {
+                padding: 5px;
+                font-size: 16px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+            }
+        }
+
+        & button {
+            padding: 5px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #0069d9;
+            }
+
+            &:disabled {
+                background-color: #ccc;
+                cursor: not-allowed;
+            }
+        }
+    }
+}
+
+.groupManagement__pagination {
+    margin-bottom: 40px;
+
+    & h2 {
+        margin-bottom: 10px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    & p {
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+
+    & button {
+        padding: 5px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-right: 10px;
+
+        &:hover {
+            background-color: #0069d9;
+        }
+
+        &:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    }
+
+    & select {
+        padding: 5px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        margin-right: 10px;
+    }
+}
+
+.groupManagement__sorting {
+    margin-bottom: 40px;
+
+    & h2 {
+        margin-bottom: 10px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    & p {
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+
+    & select {
+        padding: 5px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        margin-right: 10px;
+    }
+}
+
+.groupManagement__search {
+    margin-bottom: 40px;
+
+    & h2 {
+        margin-bottom: 10px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    & input {
+        padding: 5px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+}

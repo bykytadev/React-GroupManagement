@@ -74,7 +74,7 @@ export default function Login() {
           <label htmlFor="password" className={styles.label}>Password:</label>
           <input type="password" id="password" value={password} onChange={handlePasswordChange} className={styles.input} />
         </div>
-        <div>
+        <div className='checkbox-container'>
           <label htmlFor="rememberMe" className={styles.label}>Remember me</label>
           <input type="checkbox" id="rememberMe" checked={rememberMe} onChange={handleRememberMeChange} className={styles.checkbox} />
         </div>
