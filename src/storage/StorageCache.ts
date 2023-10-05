@@ -7,16 +7,25 @@ export type User = {
   status: string;
 };
 
-export const isRememberMe = (): boolean => {
-  if (localStorage.getItem("isRememberMe") !== null) {
-    return JSON.parse(localStorage.getItem("isRememberMe") || 'false');
+export const isRememberMe = () => {
+  // if (localStorage.getItem("isRememberMe") !== null) {
+  //   return JSON.parse(localStorage.getItem("isRememberMe") || 'false');
+  // }
+  // return true;
+  if (localStorage.getItem("isRememberMe")) {
+    console.log(localStorage.getItem("isRememberMe"))
+    return Boolean(localStorage.getItem("isRememberMe"));
   }
-  return true;
-}
+
+  if (sessionStorage.getItem("isRememberMe")) {
+    console.log(sessionStorage.getItem("isRememberMe"))
+    return Boolean(sessionStorage.getItem("isRememberMe"));
+  }
+};
 
 export const setRememberMe = (isRemember: boolean): void => {
   localStorage.setItem("isRememberMe", JSON.stringify(isRemember));
-}
+};
 
 export const setItem = (key: string, value: string): void => {
   if (isRememberMe()) {
@@ -24,14 +33,14 @@ export const setItem = (key: string, value: string): void => {
   } else {
     sessionStorage.setItem(key, value);
   }
-}
+};
 
 export const getItem = (key: string): string | null => {
   if (isRememberMe()) {
     return localStorage.getItem(key);
   }
   return sessionStorage.getItem(key);
-}
+};
 
 export const removeItem = (key: string): void => {
   if (isRememberMe()) {
@@ -39,23 +48,23 @@ export const removeItem = (key: string): void => {
   } else {
     sessionStorage.removeItem(key);
   }
-}
+};
 
 export const setToken = (token: string): void => {
   setItem("token", token);
-}
+};
 
 export const removeToken = (): void => {
   removeItem("token");
-}
+};
 
 export const getToken = (): string | null => {
   return getItem("token");
-}
+};
 
 export const isAuth = (): boolean => {
   return getToken() !== null;
-}
+};
 
 export const setUserInfo = (user: User): void => {
   setItem("firstname", user.firstname);
@@ -64,18 +73,18 @@ export const setUserInfo = (user: User): void => {
   setItem("email", user.email);
   setItem("role", user.role);
   setItem("status", user.status);
-}
+};
 
 export const getUserInfo = (): User | null => {
   return {
-    "firstname": getItem("firstname") || "",
-    "lastname": getItem("lastname") || "",
-    "username": getItem("username") || "",
-    "email": getItem("email") || "",
-    "role": getItem("role") || "",
-    "status": getItem("status") || "",
+    firstname: getItem("firstname") || "",
+    lastname: getItem("lastname") || "",
+    username: getItem("username") || "",
+    email: getItem("email") || "",
+    role: getItem("role") || "",
+    status: getItem("status") || "",
   };
-}
+};
 
 export const removeUserInfo = (): void => {
   removeItem("firstname");

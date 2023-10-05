@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from 'styles/GroupManagement.module.scss';
 import { Group } from 'props/StyleProps';
+import http from 'services/axiosClient';
 
 const GroupManagement = () => {
   const [groups, setGroups] = useState<Group[]>([]);
@@ -17,20 +18,31 @@ const GroupManagement = () => {
   const [sortDirection, setSortDirection] = useState<string>('asc');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJobXRydW5nIiwiZXhwIjoxNjk3MDgyODc0fQ.UQSTLKbBOWJe7zogpLb4J1rQs-m3ToyaNBhFlDYnWlo5BbjihnyNk5HxgR8r4frQ7x_oWNZdUz2xw9ZShmSkhw';
+  // const token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJobXRydW5nIiwiZXhwIjoxNjk3MDgyODc0fQ.UQSTLKbBOWJe7zogpLb4J1rQs-m3ToyaNBhFlDYnWlo5BbjihnyNk5HxgR8r4frQ7x_oWNZdUz2xw9ZShmSkhw';
 
-  const config = {
-    headers: { Authorization: `Bearer ${token}` }
-  };
+  // const config = {
+  //   headers: { Authorization: `Bearer ${token}` }
+  // };
 
-  useEffect(() => {
-    axios.get(`http://localhost:8080/api/v1/groups?page=${currentPage}&size=${itemsPerPage}&sort=${sortField},${sortDirection}&search=${searchQuery}`, config)
+  const getGrouList = () => {
+    http.get(`/groups?page=${currentPage}&size=${itemsPerPage}&sort=${sortField},${sortDirection}&search=${searchQuery}`)
       .then(response => {
         setGroups(response.data.content);
       })
       .catch(error => {
         console.log(error);
       });
+  }
+
+  useEffect(() => {
+    // http.get(`/groups?page=${currentPage}&size=${itemsPerPage}&sort=${sortField},${sortDirection}&search=${searchQuery}`)
+    //   .then(response => {
+    //     setGroups(response.data.content);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
+    getGrouList()
   }, [deleted, updateSuccess, currentPage, itemsPerPage, sortField, sortDirection, searchQuery]);
 
   const handleCreateGroup = () => {
@@ -38,10 +50,11 @@ const GroupManagement = () => {
       name: name
     };
 
-    axios.post('http://localhost:8080/api/v1/groups', data, config)
+    http.post('/groups', data)
       .then(response => {
         console.log(response.data);
         setUpdateSuccess(true);
+        getGrouList()
       })
       .catch(error => {
         console.log(error);
@@ -53,21 +66,30 @@ const GroupManagement = () => {
       name: updateGroupName
     };
 
-    axios.put(`http://localhost:8080/api/v1/groups/${id}`, data, config)
-      .then(response => {
-        console.log(response.data);
-        setUpdateSuccess(true);
-      })
+    // axios.put(`http://localhost:8080/api/v1/groups/${id}`, data, config)
+    // .then(response => {
+    //   console.log(response.data);
+    //   setUpdateSuccess(true);
+    // })
+    // .catch(error => {
+    //   console.log(error);
+    // });
+    http.put(`/groups/${id}`, data).then(response => {
+      console.log(response.data);
+      setUpdateSuccess(true);
+      getGrouList()
+    })
       .catch(error => {
         console.log(error);
       });
   };
 
   const handleDeleteGroup = (id: number) => {
-    axios.delete(`http://localhost:8080/api/v1/groups/${id}`, config)
+    http.delete(`/groups/${id}`)
       .then(response => {
         console.log(response.data);
         setDeleted(true);
+        getGrouList()
       })
       .catch(error => {
         console.log(error);

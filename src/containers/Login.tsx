@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styles from 'styles/Login.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [rememberMe, setRememberMe] = useState<boolean>(false);
+  const navigate = useNavigate()
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -21,41 +23,29 @@ export default function Login() {
 
   const handleSignInSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-  
+
     if (username.trim() === '') {
       alert('Please enter a username');
       return;
     }
-  
+
     if (password.trim() === '') {
       alert('Please enter a password');
       return;
     }
-  
+
     const storage = rememberMe ? localStorage : sessionStorage;
-  
-    const loginDataString = storage.getItem('loginData');
-    if (loginDataString) {
-      const loginData = JSON.parse(loginDataString);
-      const { firstName, isRememberMe, role, status, userName, email, lastName, token } = loginData;
-      console.log(firstName, isRememberMe, role, status, userName, email, lastName, token);
-    }
+
     axios.get(`http://localhost:8080/api/v1/login?username=${username}&password=${password}`)
       .then(response => {
-        console.log(response);
-        const { firstName, lastName, role, status, userName, email, token } = response.data;
         const loginData = {
+          ...response.data,
           isRememberMe: rememberMe,
-          token,
-          firstName,
-          lastName,
-          role,
-          status,
-          userName,
-          email,
         };
-        
+
         storage.setItem('loginData', JSON.stringify(loginData));
+        storage.setItem('isRememberMe', JSON.stringify(rememberMe));
+        navigate("/profile-management")
       })
       .catch(error => {
         alert('Login failed. Please check your username and password.');
