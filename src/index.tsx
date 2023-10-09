@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { RouterProvider, createBrowserRouter } from "react-router-dom"
+import { createBrowserRouter } from "react-router-dom"
 import LayoutRoot from 'components/LayoutRoot';
 import Login from 'containers/Login';
 import CreateNewAccount from 'containers/CreateNewAccount';
@@ -10,6 +10,7 @@ import ProfileManagement from 'components/ProfileManagement';
 import GroupManagement from 'components/GroupManagement';
 import ResetPassword from 'containers/ResetPassword';
 import NewPassword from 'containers/NewPassword';
+import App from 'App';
 
 const router = createBrowserRouter([
   {
@@ -50,7 +51,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <App />
   </React.StrictMode>
 );
 

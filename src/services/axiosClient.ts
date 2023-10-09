@@ -27,7 +27,7 @@ axios.interceptors.response.use(
     return response;
   },
   function (error) {
-    // Bất kì mã trạng thái nào lọt ra ngoài tầm 2xx đều khiến hàm này được trigger\
+    // Bất kì mã trạng thái nào lọt ra ngoài tầm 2xx đều khiến hàm này được trigger
     // Làm gì đó với lỗi response
     return Promise.reject(error);
   }

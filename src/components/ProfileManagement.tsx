@@ -1,38 +1,48 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import http from 'services/axiosClient';
+import styles from 'ProfileManagement.module.scss'
 
 interface UserProfile {
   userName: string;
   email: string;
   firstName: string;
   lastName: string;
-  avatarUrl: string;
+  avatarUrl?: string;
 }
 
 const ProfileManagement = () => {
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const [userProfile, setUserProfile] = useState<UserProfile>({
+    userName: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    avatarUrl: ''
+  });
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [editedProfile, setEditedProfile] = useState<UserProfile | null>(null);
+  const [editedProfile, setEditedProfile] = useState<UserProfile>({
+    userName: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    avatarUrl: ''
+  });
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  console.log(editedProfile.avatarUrl);
+  const getUserProfile = async () => {
+    http.get('/users/profile')
+      .then(response => {
+        setUserProfile(response.data);
+      }
+      )
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const response = await axios.get<UserProfile>('http://localhost:8080/api/v1/users/profile', {
-          headers: {
-            'Accept-Encoding': 'gzip, deflate, br',
-            'Connection': 'keep-alive',
-            'Authorization': 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJobXRydW5nIiwiZXhwIjoxNjk2ODY4MTExfQ.VbGV-jnsi8LDLbK3QsEoybLBiJ0Y88agtyVEzbHSvB-JlXNPQJtR4ypTSpuEsxo431d2nFL1ri6jKZwOskbgVw'
-          }
-        });
-        setUserProfile(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchUserProfile();
+    getUserProfile()
   }, []);
 
   const handleEditProfile = () => {
@@ -42,7 +52,13 @@ const ProfileManagement = () => {
 
   const handleCancelEdit = () => {
     setIsEditing(false);
-    setEditedProfile(null);
+    setEditedProfile({
+      userName: '',
+      email: '',
+      firstName: '',
+      lastName: '',
+      avatarUrl: ''
+    });
   };
 
   const handleProfileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,31 +74,28 @@ const ProfileManagement = () => {
     const file = event.target.files?.[0];
     if (file) {
       setSelectedFile(file);
-      const reader = new FileReader();
+      const reader: any = new FileReader();
       reader.onload = () => {
         setPreviewUrl(reader.result as string);
+        setEditedProfile(prev => ({
+          ...prev,
+          avatarUrl: reader.result.split('base64,')[1]
+        }))
       };
       reader.readAsDataURL(file);
     }
   };
 
   const handleSaveProfile = async () => {
-    try {
-      if (editedProfile?.userName && editedProfile?.email && editedProfile?.firstName && editedProfile?.lastName && editedProfile?.avatarUrl) {
-        setIsEditing(false);
-        const response = await axios.put<UserProfile>('http://localhost:8080/api/v1/users/profile', editedProfile, {
-          headers: {
-            'Accept-Encoding': 'gzip, deflate, br',
-            'Connection': 'keep-alive',
-            'Authorization': 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJobXRydW5nIiwiZXhwIjoxNjk2ODY4MTExfQ.VbGV-jnsi8LDLbK3QsEoybLBiJ0Y88agtyVEzbHSvB-JlXNPQJtR4ypTSpuEsxo431d2nFL1ri6jKZwOskbgVw'
-          }
-        });
+    http.put('/users/profile', editedProfile)
+      .then(response => {
         setUserProfile(response.data);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+        setIsEditing(false);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   return (
     <div>
@@ -116,7 +129,7 @@ const ProfileManagement = () => {
                   <input type="file" accept="image/*" onChange={handleFileInputChange} />
                   {previewUrl && (
                     <div>
-                      <img src={previewUrl} alt="Preview" />
+                      <img src={previewUrl} alt="Preview" style={{ verticalAlign: 'middle', width: '100px', height: '100px', borderRadius: '50%' }} />
                     </div>
                   )}
                 </div>
@@ -131,8 +144,8 @@ const ProfileManagement = () => {
               <h2>{userProfile.userName}</h2>
               <p>{userProfile.email}</p>
               <p>{userProfile.firstName} {userProfile.lastName}</p>
-              <img src={userProfile.avatarUrl} alt="User Avatar" />
-              <button type="button" onClick={handleEditProfile}>Edit Profile</button>
+              <img src={userProfile.avatarUrl} alt="User Avatar" style={{ verticalAlign: 'middle', width: '150px', height: '150px', borderRadius: '50%' }} />
+              <p><button type="button" onClick={handleEditProfile}>Edit Profile</button></p>
             </div>
           )}
         </div>

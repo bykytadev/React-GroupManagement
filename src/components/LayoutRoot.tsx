@@ -27,7 +27,9 @@ export default function LayoutRoot() {
                         </li>
                     </ul>
                 </div>
-                <Outlet />
+                <div className={styles.content}>
+                    <Outlet />
+                </div>
                 <div className={styles.footer}>
                     <p>@VTI 2023</p>
                 </div>

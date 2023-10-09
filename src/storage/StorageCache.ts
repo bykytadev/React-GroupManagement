@@ -8,16 +8,11 @@ export type User = {
 };
 
 export const isRememberMe = () => {
-  // if (localStorage.getItem("isRememberMe") !== null) {
-  //   return JSON.parse(localStorage.getItem("isRememberMe") || 'false');
-  // }
-  // return true;
   if (localStorage.getItem("isRememberMe")) {
     console.log(localStorage.getItem("isRememberMe"))
     return Boolean(localStorage.getItem("isRememberMe"));
   }
-
-  if (sessionStorage.getItem("isRememberMe")) {
+  else if (sessionStorage.getItem("isRememberMe")) {
     console.log(sessionStorage.getItem("isRememberMe"))
     return Boolean(sessionStorage.getItem("isRememberMe"));
   }
