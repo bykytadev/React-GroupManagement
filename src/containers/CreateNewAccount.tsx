@@ -24,10 +24,12 @@ const FormSignUp: React.FC = () => {
     return re.test(email);
   }
 
+  //password toi thieu 8 ky tu va khong chua ky tu dac biet
   const validatePassword = (password: string) => {
-    const re = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    const re = /^[A-Za-z\d]{8,}$/;
     return re.test(password);
   }
+  
 
   const validateConfirmPassword = (password: string, confirmPassword: string) => {
     return password === confirmPassword;
@@ -45,7 +47,7 @@ const FormSignUp: React.FC = () => {
       return;
     }
     if (!validatePassword(password)) {
-      alert('Password must be at least 8 characters and include at least one number');
+      alert('My password is missing 8 characters and does not contain special characters');
       return;
     }
     if (!validateConfirmPassword(password, confirmPassword)) {

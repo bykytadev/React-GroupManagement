@@ -43,11 +43,11 @@ export default function GroupManagement() {
       alert('Group name cannot be empty');
       return;
     }
-  
+
     const data = {
       name: createData.groupName
     };
-  
+
     http.post('/groups', data)
       .then(response => {
         console.log(response.data);
@@ -185,9 +185,12 @@ export default function GroupManagement() {
               <tr key={group.id}>
                 <td>{group.id}</td>
                 <td>{group.name}</td>
+                {/* id số lẻ ẩn button delete */}
                 <td>
                   <button className={classes.groupManagement__btn} onClick={() => handleUpdateButtonClick(group.id)}>Update</button>
-                  <button className={classes.groupManagement__btn} onClick={() => handleDeleteGroup(group.id)}>Delete</button>
+                  {group.id % 2 === 0 ? (
+                    <button className={classes.groupManagement__btn} onClick={() => handleDeleteGroup(group.id)}>Delete</button>
+                  ) : null}
                 </td>
               </tr>
             ))}
