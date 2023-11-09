@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FormValues } from 'props/StyleProps';
 import FormInput from 'components/FormInput';
-import styles from 'styles/SignUp.module.scss';
+import styles from 'styles/signup.module.scss';
 import axios from 'axios';
 
 const FormSignUp: React.FC = () => {
